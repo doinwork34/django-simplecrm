@@ -1,0 +1,25 @@
+{% block left_actionbar %}
+<!-- The overlay -->
+<div id="myNav" class="overlay">
+
+  <!-- Button to close the overlay navigation -->
+  <div class="container" id="close"><h1>Go Back</h1></div>
+
+  <!-- Overlay content -->
+  <div class="overlay-content">
+  <a href="{% url 'accounts:create_ticket' %}" class="active"><h2>Create Ticket</h2></a>
+  <a href="{% url 'accounts:tickets' %}"><h2>View Tickets</h2></a>
+  <a href="{% url 'accounts:client' %}"><h2>Clients</h2></a>
+  <a href="{% url 'accounts:create_ticket' %}"><h2>Orders</h2></a>
+  <a href="{% url 'accounts:create_ticket' %}"><h2>Placeholder</h2></a>
+  </div>
+
+</div>
+
+<!-- Use any element to open/show the overlay navigation menu -->
+
+
+
+
+{% endblock %}
+

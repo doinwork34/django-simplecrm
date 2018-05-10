@@ -1,0 +1,30 @@
+{% block body %}
+{{ name.clientname }}
+<div class="container" id="ticket_container">
+		
+		<table class="table table-row">
+			<thead>
+				<th>Ticket Status</th>
+				<th>Ticket Title</th>
+				<th>Start Date</th>
+			</thead>
+			<tbody>
+			{% for tickets in tickets %}
+				<tr>
+					{% if tickets.ticket_status == 5 %}
+					<td class="success">Resolved</td>
+					{% elif tickets.ticket_status == 1 %}
+					<td class="danger">Open</td>
+					{% else %}
+					<td class="warning">Not Sure</td>
+					{% endif %}
+					<td>{{ tickets.ticket_title }}</td>
+					<td>{{ tickets.ticketstartdate }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+</div>
+{% endblock %}

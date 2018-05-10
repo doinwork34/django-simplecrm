@@ -1,0 +1,18 @@
+{% block account_toolbar %}
+	<div class="row" id="logged_in_as">
+    	<h4>You are logged in as {{ user.username }}</h4>
+	</div>
+    <div class="row" id="action_bar_buttons">
+    	<a href="{% url 'accounts:logout' %}"><i class="material-icons">sort</i>Logout</a>
+    	<a href="{% url 'accounts:change_password' %}"><i class="material-icons">sort</i>Change Password</a>
+    	<a href="{% url 'accounts:reset_password' %}"><i class="material-icons">sort</i>Reset Password</a>
+    	<a href="{% url 'accounts:register' %}"><i class="material-icons">add</i>Register</a>
+    	<a href="{% url 'accounts:login' %}"><i class="material-icons">add</i>Login</a>
+    	<a href="{% url 'accounts:view_profile' %}"><i class="material-icons">sort</i>View Profile</a>
+    	<a href="#"><i class="material-icons">add</i>Account Settings</a>
+	</div>
+{% endblock %}
+
+
+
+

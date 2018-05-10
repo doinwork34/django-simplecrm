@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+	<div class="row" id="title">
+		<div class="col-sm-4">
+			<h1>{{ clientinfo.clientname }}</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-offset-4">
+			<h2>{{ clientinfo.phonenumber }}</h2>
+			<h2>{{ clientinfo.address1 }}</h2>
+			<h2>{{ clientinfo.notes }}</h2>
+			<h2></h2>
+		</div>
+	</div>
+	
+</div>
+<div class="row">
+<form method="POST" action={% url 'accounts:client' %}>
+	{% csrf_token %}
+	<button type="submit" name='oid' value="{{ clientinfo.oid }}">View Service Tickets</button>
+	
+</div>
+</form>
+{% endblock %}
+

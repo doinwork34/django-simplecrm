@@ -1,0 +1,45 @@
+Metadata-Version: 1.1
+Name: django-simplecrm
+Version: 0.1
+Summary: UNKNOWN
+Home-page: https://github.com/doinwork34/Simple_CRM
+Author: Mike
+Author-email: UNKNOWN
+License: BSD License
+Description: =====
+        Simple CRM
+        =====
+        
+        
+        
+        Quick start
+        -----------
+        
+        1. Add "simplecrm" to your INSTALLED_APPS setting like this::
+        
+            INSTALLED_APPS = [
+                ...
+                'simplecrm',
+            ]
+        
+        2. Include the polls URLconf in your project urls.py like this::
+        
+            path('accounts/', include('accounts.urls')),
+        
+        3. Run `python manage.py migrate` to create the simplecrm models.
+        
+        4. Start the development server and visit http://127.0.0.1:8000/admin/
+           
+        
+        
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content

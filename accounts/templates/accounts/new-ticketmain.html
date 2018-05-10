@@ -1,0 +1,50 @@
+{% extends "base.html" %} 
+
+
+{% block title %}
+    <h3>New Ticket</h3>
+{% endblock %}
+
+{% block body %}
+
+{% block multi-page-new-ticket %}
+{% include "accounts/multi-page-new-ticket.html" %}
+{% endblock %}
+
+{% endblock %}
+
+
+{% block script %}
+
+
+<script>
+  
+    $('#id_clientid').change(function(event){
+      
+        var urls = $('#ajax_url').attr('href');
+        var  clientid = $('#id_clientid');
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: urls,
+            data: {
+                'clientid' : $('#id_clientid').val(), csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(result) {
+                $.each(result, function(index, value) {
+                    $('#id_contact_name')
+                        .append($("<option></option>")
+                                .attr("value",value.fields.contactname)
+                                .text(value.fields.contactname));
+                });
+
+            },
+            error: function (error) {
+                alert("Error with Ajax, You SUCK");
+            }
+        });
+    });
+
+
+</script>
+{% endblock %}

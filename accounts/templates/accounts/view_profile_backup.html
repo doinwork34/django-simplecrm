@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Profile</title>
+{% endblock %}
+
+{% block title %}
+<h3>Dashboard<h4>
+{% endblock %}
+<div class='container' id="custom-nav">
+	<button class="custom-btn"><h4>Open Tickets</h4></button>
+	<button class="custom-btn"><h4>Recent Tickets</h4></button>
+	<button class="custom-btn"><h4>Pending Tickets</h4></button>
+	<button class="custom-btn"><h4>Billing And Orders</h4></button>
+</div>
+{% block body %}
+	
+
+
+{% if tickets %}
+
+<div class="container" id="ticket_window">
+	
+<form method="GET" action="{% url 'accounts:ticket_detail' %}" id="profile_tickets">
+<div class="container" id="ticket_container">
+		
+		<div class="container" id="table">
+			<div class="container" id="header">
+				<div class="col-sm-2">Ticket Status</div>
+				<div class="col-sm-5">Ticket Title</div>
+				<div class="col-sm-5">Start Date</div>
+			</div>
+			<div class="container" id="tablebody">
+			{% for tickets in tickets %}
+			{% if tickets.ticket_status == 5 %}
+			<button type='submit' name='tdetails' value="{{ tickets.oid }}" class="btn btn-block" id="success">				
+				<div class="col-sm-2" id="status_col"><h4>Resolved</h4></div>
+				<div class="col-sm-5" id="title_col">{{ tickets.ticket_title }}</div>
+				<div class="col-sm-5" id="date_col">{{ tickets.ticketstartdate }}</div>
+			</button>
+			{% elif tickets.ticket_status == 1 %}
+			<button type='submit' name='tdetails' value="{{ tickets.oid }}" class="btn btn-block" id="danger">				
+				<div class="col-sm-2" id="status_col"><h4>Open</h4></div>
+				<div class="col-sm-5" id="title_col">{{ tickets.ticket_title }}</div>
+				<div class="col-sm-5" id="date_col">{{ tickets.ticketstartdate }}</div>
+			</button>
+			{% elif tickets.ticket_status == 1 %}
+			<button type='submit' name='tdetails' value="{{ tickets.oid }}" class="btn btn-block" id="warning">				
+				<div class="col-sm-2" id="status_col"><h4>Notsure</h4></div>
+				<div class="col-sm-5" id="title_col">{{ tickets.ticket_title }}</div>
+				<div class="col-sm-5" id="date_col">{{ tickets.ticketstartdate }}</div>
+			</button>
+			{% endif %}			 
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+
+</form>
+</div>
+</div>
+{% else %}
+
+
+
+
+<div class='container'>
+<h2>username: {{ user }}</h2>
+<h2>first name: {{ user.first_name }}</h2>
+<h2>last name: {{ user.last_name }}</h2>
+<h2>email: {{ user.email }}</h2>
+</div>
+<form method="POST" action="" id="auto_submit_form">
+	{% csrf_token %}
+	<input type="hidden" name="recent_tickets" value="{{ user.first_name }}"></input>
+</form>
+{% endif %}
+
+{% endblock %}
+
+

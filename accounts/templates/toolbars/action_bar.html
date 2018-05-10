@@ -1,0 +1,24 @@
+{% block action_bar %}
+<div class="container" id='right_nav'>
+        <div class="row">
+            <ul type="none" id="span">
+                <li><a href="{% url 'accounts:create_ticket' %}">
+                	<i class="material-icons"><h4>note add</i><h4>New Ticket</h4></a>
+                </li>
+                <li><a href="{% url 'accounts:create_ticket' %}">
+                	<i class="material-icons"><h4>edit</i><h4>Edit Ticket</h4></a>
+                </li>
+                <li><a href="{% url 'accounts:tickets' %}">
+                	<i class="material-icons"><h4>find_in_page</i><h4>View Tickets</h4></a>
+                </li>
+                <li><a href="{% url 'accounts:client' %}">
+                	<i class="material-icons"><h4>contacts</i><h4>View Clients</h4></a>
+                </li>
+                <li><a href="{% url 'accounts:create_ticket' %}">
+                	<i class="material-icons"><h4>schedule<h4></i>View Tasks</h4></a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+{% endblock %}

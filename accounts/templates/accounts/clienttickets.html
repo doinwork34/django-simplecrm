@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block body %}
+<h1>{{ clientname.clientname }}</h1>
+{% for tickets in tickets %}
+<div class="container" id="ticket">
+<h2>{{ tickets.ticket_title }}</h2>
+<h2>{{ tickets.timestamp }}</h2>
+<p>{{ tickets.client_notes }}</p>
+<h2>{{ tickets.technician }}</h2>
+</div>
+{% endfor %}
+{% endblock %}

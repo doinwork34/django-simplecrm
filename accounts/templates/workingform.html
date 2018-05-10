@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %}
+<h3>New Ticket</h3>
+{% endblock %}
+{% block body %}
+<form method=POST action="{% url 'accounts:create_ticket' %}">
+  {% csrf_token %}
+<h5 id="newticket_fieldtitle">Ticket Title</h5>
+{{ ticket.ticket_title }}
+
+<div class="container">
+  <div class="row">
+    Date formats: yyyy-mm-dd, yyyymmdd, dd-mm-yyyy, dd/mm/yyyy, ddmmyyyyy
+  </div>
+  <br />
+    <div class="row">
+        <div class='col-sm-3'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input name='ticketstartdate" type='text' class="form-control">{{ ticket.ticketstartdate }}</input>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h5 id="newticket_fieldtitle">Technician</h5>
+{{ ticket.technician }}
+
+<h5 id="newticket_fieldtitle">Client</h5>
+{{ ticket.clientid }}
+
+<h5 id="newticket_fieldtitle">Contact</h5>
+{{ ticket.contact_name }}
+
+<h5 id="newticket_fieldtitle">Worktype</h5>
+{{ ticket.worktype }}
+
+<h5 id="newticket_fieldtitle">Ticket Status</h5>
+{{ ticket.ticket_status }}
+
+<h5 id="newticket_fieldtitle">Client Notes</h5>
+{{ ticket.client_notes }}
+
+{{ ticket.timestamp }}
+<button type='submit'>Submit</button>
+</form>
+
+<a href="{% url 'accounts:ajax_req' %}" id="ajax_url"></a>
+
+{% endblock %}
+
+{% block script %}
+<script>
+    $('#id_clientid').change(function(event){
+      
+        var urls = $('#ajax_url').attr('href');
+        var  clientid = $('#id_clientid');
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: urls,
+            data: {
+                'clientid' : $('#id_clientid').val(), csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(result) {
+                $.each(result, function(index, value) {
+                    $('#id_contact_name')
+                        .append($("<option></option>")
+                                .attr("value",value.fields.contactname)
+                                .text(value.fields.contactname));
+                });
+
+            },
+            error: function (error) {
+                alert("Error with Ajax, You SUCK");
+            }
+        });
+    });
+
+
+
+</script>
+{% endblock %}

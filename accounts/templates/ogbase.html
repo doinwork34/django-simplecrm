@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 	{% block head %}
+	<title>Base</title>
+	{% endblock %}
+</head>
+<body>
+	<div class='container'>
+	{% if user.is_authenticated %}
+	<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="{% url 'accounts:login' %}">Login</a></li>
+      <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+      <li><a href="{% url 'accounts:register' %}">Register</a></li>
+      <li><a href="{% url 'accounts:view_profile' %}">Profile</a></li>
+      <li><a href="{% url 'accounts:edit_profile' %}">Edit Profile</a></li>
+      <li><a href="{% url 'accounts:reset_password' %}">Reset Password</a></li>
+      <li><a href="{% url 'accounts:change_password' %}">Change Password</a></li>      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="{% url 'accounts:register' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="{% url 'accounts:login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="{% url 'crm:allclients' %}">Clients</a></li>     
+    </ul>
+  </div>
+</nav>
+{% else %}
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="{% url 'accounts:register' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="{% url 'accounts:login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+{% endif %}
+	</div>
+{% block body %}
+<h1>Base block coming through</h1>
+{% endblock %}
+</body>
+</html>
+
+
+
+
+
+<!-- Based on http://bootsnipp.com/snippets/featured/responsive-sidebar-menu -->
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  
+<nav class="navbar navbar-m2p sidebar" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                Foobar<b>Company</b>
+            </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <!-- Dashboard -->
+                <li class="active open">
+                  <a href="#">
+                      <span class="pull-right hidden-xs showopacity glyphicon material-icons">av_timer</span>My Dashboard
+                  </a>
+                </li>
+                <!-- Banner -->
+                <li class="">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">burst_mode</span>
+                        My Dashboard<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                        <li><a href="#"><i class="material-icons">add</i>Account Settings</a></li>
+                        <li><a href="{% url 'accounts:logout' %}"><i class="material-icons">sort</i>Logout</a></li>
+                    </ul>
+                </li>
+                <li class="separator">Service Tickets</li>
+                <!-- Page -->
+                <li class="">
+                    <a href="{% url 'accounts:create_ticket' %}" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">description</span>
+                        New Service Ticket <span class="caret"></span>
+                    </a>
+                </li>
+                <!-- Blog -->
+                <li class="">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">chat_bubble_outline</span>
+                        Ticket List <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                        <li><a href="#"><i class="material-icons">add</i>Recent Tickets</a></li>
+                        <li><a href="#"><i class="material-icons">sort</i>All Tickets</a></li>
+                    </ul>
+                </li>
+                <!-- Tags -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon material-icons">label</span>
+                        Tags <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu forAnimate" role="menu">
+                        <li><a href="#"> <i class="material-icons">add</i> Add</a></li>
+                        <li><a href="#"> <i class="material-icons">sort</i> List</a></li>
+                    </ul>
+                </li>
+                <li class="separator">Clients</li>
+                <!-- Users -->
+                <li class="#">
+                    <a href="{% url 'crm:allclients' %}" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">group</span>
+                        All Client List <span class="caret"></span>
+                    </a>
+                </li>
+                <!-- Exit -->
+                <li>
+                    <a href="#">
+                        <span class="menu-icon pull-right hidden-xs showopacity glyphicon material-icons">exit_to_app</span>Quick Search
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

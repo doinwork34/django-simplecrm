@@ -1,0 +1,20 @@
+
+{% block body %}
+<form method=POST action="{% url 'accounts:test' %}">
+	{% csrf_token %}
+ {{ ticket }}
+  </ul>
+
+  <button type="submit">SUBMIT THIS THIS</button>
+</div>
+
+</form>
+   {% if ticket.errors %}
+    {% for field in ticket %}
+        {% for error in field.errors %}
+            <p> {{ errors }} </p>
+        {% endfor %}
+    {% endfor %}
+
+{% endif %}
+{% endblock %}
