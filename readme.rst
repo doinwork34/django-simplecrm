@@ -4,9 +4,9 @@ Simple CRM
 
 Requirements
 ------------
-Django v1.11.7
-django-unixdatetimefield v0.1.6
-psycopg2 v 2.7.4  (if using a Postgresql db, also works with MySQL) 
+Django v1.11.7;
+django-unixdatetimefield v0.1.6;
+psycopg2 v 2.7.4  (if using a Postgresql db, also works with MySQL); 
 
 Quick start
 -----------
