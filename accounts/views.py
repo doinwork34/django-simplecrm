@@ -32,10 +32,10 @@ def view_profile(request):
 			techname = request.POST['recent_tickets']
 			tickets = Servicetickets.objects.filter(technician=techname).order_by('-ticketstartdate')
 			lib={'user':request.user,'tickets':tickets}
-			return render (request, 'accounts/view_profile.html', lib)
+			return render (request, 'accounts/profile/view_profile.html', lib)
 	else:		
 		args = {'user': request.user}
-		return render(request, 'accounts/view_profile.html', args)
+		return render(request, 'accounts/profile/view_profile.html', args)
 
 def edit_profile(request):
 	if request.method == 'POST':
@@ -47,7 +47,7 @@ def edit_profile(request):
 	else:
 		form = EditProfileForm(instance=request.user)
 		args= {'form':form}
-		return render(request, 'accounts/edit_profile.html', args)
+		return render(request, 'accounts/profile/edit_profile.html', args)
 
 
 
@@ -64,7 +64,7 @@ def change_password(request):
 	else:
 		form = PasswordChangeForm(user=request.user)
 		args= {'form':form}
-		return render(request, 'accounts/change_password.html', args)
+		return render(request, 'accounts/profile/change_password.html', args)
 
 
 
@@ -77,7 +77,7 @@ def client(request):
 			 
 			 
 			lib= {'clientinfo':profile, 'contact':contact}
-			return render(request, 'accounts/client_profile.html',lib)
+			return render(request, 'accounts/profile/client_profile.html',lib)
 		else:
 			q = request.POST['tickets']
 			tickets = Servicetickets.objects.filter(clientid=q).order_by("-timestamp")
@@ -86,7 +86,7 @@ def client(request):
 				  'name':test,
 				  }
 
-			return render(request, 'accounts/tickets.html',lib)
+			return render(request, 'accounts/tickets/tickets.html',lib)
 	elif request.method == "GET":
 			if 'tech' in request.GET and request.GET['tech']:
 				q = request.GET['tech']
@@ -97,7 +97,7 @@ def client(request):
 				query = Clientlist.objects.all().values()
 				prnt = print(request)
 				value = {'client': query}
-				return render(request, 'accounts/client.html', value)
+				return render(request, 'accounts/profile/client.html', value)
 
 def tickets(request):
 	if request.method == "GET":
@@ -106,22 +106,22 @@ def tickets(request):
 			q = request.GET['cid']
 			tickets = Servicetickets.objects.filter(clientid=q)
 			lib = {'tickets':tickets}
-			return render(request, 'accounts/tickets.html', lib)
+			return render(request, 'accounts/tickets/tickets.html', lib)
 		elif 'tech' in request.GET and request.GET['tech']:
 			q=request.GET['tech']
 			tickets = Servicetickets.objects.filter(technician=q)
 			lib = {'tickets':tickets}
-			return render(request, 'accounts/tickets.html', lib)
+			return render(request, 'accounts/tickets/tickets.html', lib)
 		elif 'filter' in request.GET and request.GET['filter']:
 			q = request.GET['filter']
 			tickets = Servicetickets.objects.filter(ticket_status=1)
 			lib={'tickets':tickets}
-			return render(request, 'accounts/tickets.html')
+			return render(request, 'accounts/tickets/tickets.html')
 
 		else:	
 			tickets = Servicetickets.objects.all().order_by('-ticketstartdate')[:30]
 			lib = {'tickets': tickets}
-			return render(request, 'accounts/tickets.html', lib)
+			return render(request, 'accounts/tickets/tickets.html', lib)
 
 
 def ticket_detail(request):
@@ -131,7 +131,7 @@ def ticket_detail(request):
 			qset = Servicetickets.objects.get(oid=q)
 			tset = Timeentries.objects.filter(ticketid = q)
 			lib = {'tickets':qset, 'entries':tset}
-			return render(request, 'accounts/ticket-details.html', lib)
+			return render(request, 'accounts/tickets/ticket-details.html', lib)
 
 
 def create_ticket(request):
@@ -139,7 +139,7 @@ def create_ticket(request):
 		ticket = NewTicketForm(request.GET)
 		entries = NewTicketTimeEntries(request.GET)
 		lib = {'ticket':ticket, 'entries':entries}
-		return render(request, 'accounts/new-ticket.html', lib)
+		return render(request, 'accounts/forms/new-ticket.html', lib)
 		
 	if request.method == "POST":
 		ticket = NewTicketForm(request.POST)
@@ -170,7 +170,7 @@ def edit_ticket(request):
 			ticketreq = Servicetickets.objects.get(oid = req)
 			timeentries = Timeentries.objects.filter(ticketid = req)
 			lib = {"ticket":ticketreq, "timeentries":timeentries}
-			return render(request, 'accounts/edit-ticket.html', lib)
+			return render(request, 'accounts/forms/edit-ticket.html', lib)
 			
 def new_entry(request):
 	if request.method == "GET":
@@ -181,7 +181,7 @@ def new_entry(request):
 			ticketreq = Servicetickets.objects.get(oid = req)
 			timeentries = Timeentries.objects.filter(ticketid = req)
 			lib = {'entries':entry, "tid":initialvalue, "ticket":ticketreq, "timeentries":timeentries}
-			return render(request, 'accounts/new-entry.html', lib)
+			return render(request, 'accounts/forms/new-entry.html', lib)
 	if request.method == "POST":
 		entry = NewTicketTimeEntries(request.POST)
 		if entry.is_valid():
@@ -195,7 +195,7 @@ def test(request):
 	if request.method == "GET":
 		ticket = testticket(request.GET)
 		lib = {'ticket':ticket}
-		return render(request, 'accounts/create-ticket.html', lib)
+		return render(request, 'accounts/forms/create-ticket.html', lib)
 	else:	
 		ticket = testticket(request.POST)
 		if ticket.is_valid():

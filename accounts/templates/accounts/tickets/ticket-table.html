@@ -1,0 +1,39 @@
+{% block tickettable %}
+<div class="ticket_wall" id="ticket_window">
+	{% block page_actionbar %}
+    {% include 'accounts/toolbars/page_actionbar.html' %}
+    {% endblock %}
+<form method="GET" action="{% url 'accounts:ticket_detail' %}" id="profile_tickets">
+<div class="tckt_container" id="ticket_container">		
+		<div class="ticket_table" id="table">
+			<div class="container" id="header">
+				<div class="col-sm-2">Ticket Status</div>
+				<div class="col-sm-5">Ticket Title</div>
+				<div class="col-sm-5">Start Date</div>
+			</div>
+			<div class="container" id="tablebody">
+			{% for tickets in tickets %}
+			{% if tickets.ticket_status == 5 %}
+			<button type='submit' name='tdetails' value="{{ tickets.oid }}" class="btn btn-block" id="success">				
+				<div class="col-sm-2" id="status_col"><h2>Resolved</h2></div>
+				<div class="col-sm-5" id="title_col"><h3>{{ tickets.ticket_title }}</h3></div>
+				<div class="col-sm-5" id="date_col"><h3>{{ tickets.ticketstartdate }}<h3></div>
+			</button>
+			{% elif tickets.ticket_status == 1 %}
+			<button type='submit' name='tdetails' value="{{ tickets.oid }}" class="btn btn-block" id="danger">				
+				<div class="col-sm-2" id="status_col"><h2>Open</h2></div>
+				<div class="col-sm-5" id="title_col"><h3>{{ tickets.ticket_title }}</h3></div>
+				<div class="col-sm-5" id="date_col"><h3>{{ tickets.ticketstartdate }}</33></div>
+			</button>			{% elif tickets.ticket_status == 1 %}
+			<button type='submit' name='tdetails' value="{{ tickets.oid }}" class="btn btn-block" id="warning">				
+				<div class="col-sm-2" id="status_col"><h2>Notsure</h2></div>
+				<div class="col-sm-5" id="title_col"><h3>{{ tickets.ticket_title }}</h3></div>
+				<div class="col-sm-5" id="date_col"><h3>{{ tickets.ticketstartdate }}</33></div>
+			</button>			{% endif %}			 
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</form>
+</div>
+{% endblock %}

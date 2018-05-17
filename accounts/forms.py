@@ -58,12 +58,18 @@ class MyModelChoiceField(forms.ModelChoiceField):
 ## ticks = serviceticket.timestamp
 ## datetime(1,1,1) + timedelta(microseconds = ticks/10)
 ## output should be datetime.datetime(year, month, day, hour, minute, second ...etc)
-def testtime(*args, **kwargs):
-	dotnet = datetime(1,1,1)
-	times = datetime.now()
-	unix = times - dotnet
-	dotnettimestamp = (((unix.days*60*60*24 + unix.seconds)*1000 + unix.microseconds)*100)*100
-	return dotnettimestamp
+#def testtime(*args, **kwargs):
+#	dotnet = datetime(1,1,1)
+#	times = datetime.now()
+#	unix = times - dotnet
+#	dotnettimestamp = (((unix.days*60*60*24 + unix.seconds)*1000 + unix.microseconds)*100)*100
+#	return dotnettimestamp
+from netunix import views
+def movie():
+	t = views.dotnet_unix().now()
+	i = views.dotnet_unix().from_dotnet(t)
+	m = datetime.fromtimestampe(str(i))
+	return m
 
 class NewTicketForm(forms.ModelForm):
 	class Meta:
@@ -85,7 +91,7 @@ class NewTicketForm(forms.ModelForm):
 	worktype = forms.CharField(widget=forms.Select(choices=Worktypes.objects.values_list('worktype', 'worktype')))
 	ticketstartdate = forms.DateTimeField(widget=forms.HiddenInput())
 	timestamp = forms.CharField(widget=forms.DateInput(attrs={
-		"placeholder":'timestamp', "value":testtime}))
+		"placeholder":'timestamp', "value":movie}))
 	ticket_status = forms.CharField(widget=forms.Select(choices=Ticketstatuses.objects.values_list('oid','status')))
 
 
@@ -101,7 +107,7 @@ class NewTicketTimeEntries(forms.ModelForm):
 		}
 
 	timestamp = forms.CharField(widget=forms.DateInput(attrs={
-		"placeholder":"timestamp", "value":testtime})) 
+		"placeholder":"timestamp", "value":movie})) 
 	worktype = forms.CharField(widget=forms.Select(choices=Worktypes.objects.values_list('worktype', 'worktype'))) 
 	startdate = forms.DateTimeField(widget=forms.HiddenInput())
 	enddate = forms.DateTimeField(widget=forms.HiddenInput())
@@ -130,7 +136,7 @@ class testticket(forms.ModelForm):
 	worktype = forms.CharField(widget=forms.Select(choices=Worktypes.objects.values_list('worktype', 'worktype')))
 	ticketstartdate = forms.DateTimeField(widget=forms.HiddenInput())
 	timestamp = forms.CharField(widget=forms.DateInput(attrs={
-		"placeholder":'timestamp', "value":testtime}))
+		"placeholder":'timestamp', "value":movie}))
 	ticket_status = forms.CharField(widget=forms.Select(choices=Ticketstatuses.objects.values_list('oid','status')))
 
 
